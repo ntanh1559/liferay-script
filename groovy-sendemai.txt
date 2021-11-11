@@ -1,0 +1,27 @@
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
+import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
+
+InternetAddress fromAddress = null;
+InternetAddress toAddress = null;
+
+try {
+ 	fromAddress = new InternetAddress("ykientructuyen2@gmail.com");
+    	toAddress = new InternetAddress("ntanh559@gmail.com");
+    	MailMessage mailMessage = new MailMessage();
+    	mailMessage.setTo(toAddress);
+    	mailMessage.setFrom(fromAddress);
+    	mailMessage.setSubject("Testing mail with Plain Text");
+    	mailMessage.setBody("This Mail Comes From Liferay");
+    	MailServiceUtil.sendEmail(mailMessage);
+    	System.out.println("Send mail with Plain Text");
+} catch (AddressException e) {
+    	System.out.println(e);
+}
